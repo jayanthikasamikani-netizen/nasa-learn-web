@@ -1,0 +1,40 @@
+{
+  "entities": {
+    "ResearchNote": {
+      "title": "ResearchNote",
+      "description": "A user's saved NASA planetary research note or bookmarked telemetry analysis.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID."
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Display name of the researcher."
+        },
+        "planetTarget": {
+          "type": "string",
+          "description": "Name of the exoplanet or nebula target."
+        },
+        "noteContent": {
+          "type": "string",
+          "description": "Scientific annotation or saved analysis summary."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp when created."
+        }
+      },
+      "required": ["uid", "planetTarget", "noteContent", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/researchNotes/{noteId}": {
+      "schema": {
+        "$ref": "#/entities/ResearchNote"
+      },
+      "description": "Collection of user-saved NASA planetary research notes."
+    }
+  }
+}

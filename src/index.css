@@ -1,0 +1,362 @@
+@import "tailwindcss";
+
+@layer base {
+  html,
+  body,
+  #root {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #11151c;
+    color: #dce1ea;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+/* Custom scrollbar matching the reference NASA Dashboard design */
+.nasa-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.nasa-scroll::-webkit-scrollbar-track {
+  background: rgba(24, 28, 36, 0.55);
+  border-radius: 9999px;
+}
+
+.nasa-scroll::-webkit-scrollbar-thumb {
+  background-color: #5d6574;
+  border-radius: 9999px;
+}
+
+.nasa-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #778194;
+}
+
+.nasa-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #5d6574 rgba(24, 28, 36, 0.55);
+}
+
+/* ==========================================================================
+   FULL-SCREEN RESPONSIVE CSS MEDIA QUERIES FOR ALL DEVICES
+   (4K / ULTRA-WIDE, LARGE DESKTOP, LAPTOP, TABLET, AND MOBILE)
+   ========================================================================== */
+
+/* Base Full-Screen Outer Containers */
+.nasa-dashboard-outer,
+.nasa-opening-outer {
+  width: 100vw;
+  min-height: 100dvh;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Desktop, Laptops & Large Monitors (>= 1024px): True 100% Full-Screen Layout */
+@media (min-width: 1024px) {
+  .nasa-dashboard-shell,
+  .nasa-opening-shell {
+    width: 100vw !important;
+    max-width: 100% !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+
+  .nasa-dashboard-shell {
+    flex-direction: row;
+    overflow: hidden;
+  }
+
+  .nasa-sidebar {
+    width: 215px;
+    flex-direction: column;
+  }
+
+  .nasa-sidebar-nav {
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 620px;
+  }
+
+  .nasa-main-workspace {
+    overflow: hidden;
+    padding: 1rem 1.25rem 0.6rem 1.25rem;
+  }
+
+  .nasa-news-hero {
+    height: 155px;
+  }
+
+  .nasa-category-hero {
+    height: 210px;
+  }
+}
+
+/* Large Desktop Monitors & Full HD Screens (>= 1440px) */
+@media (min-width: 1440px) {
+  .nasa-sidebar {
+    width: 240px !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .nasa-sidebar-nav {
+    max-height: 720px !important;
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+  }
+
+  .nasa-main-workspace {
+    padding: 1.25rem 1.5rem 0.75rem 1.5rem !important;
+  }
+
+  .nasa-content-grid {
+    gap: 1.15rem !important;
+  }
+
+  .nasa-news-hero {
+    height: 185px !important;
+  }
+
+  .nasa-category-hero {
+    height: 245px !important;
+  }
+
+  .nasa-ai-workspace {
+    max-width: 1240px !important;
+  }
+
+  .nasa-ai-chat-stream,
+  .nasa-ai-prompt-box {
+    max-width: 1120px !important;
+  }
+}
+
+/* Ultra-Wide / 2K / 4K Displays (>= 1920px) */
+@media (min-width: 1920px) {
+  .nasa-sidebar {
+    width: 270px !important;
+  }
+
+  .nasa-sidebar-nav {
+    max-height: 860px !important;
+  }
+
+  .nasa-main-workspace {
+    padding: 1.5rem 2rem 1rem 2rem !important;
+  }
+
+  .nasa-content-grid {
+    gap: 1.5rem !important;
+  }
+
+  .nasa-news-hero {
+    height: 230px !important;
+  }
+
+  .nasa-category-hero {
+    height: 300px !important;
+  }
+
+  .nasa-opening-title {
+    font-size: 64px !important;
+    max-width: 1040px !important;
+  }
+
+  .nasa-ai-workspace {
+    max-width: 1440px !important;
+  }
+
+  .nasa-ai-chat-stream,
+  .nasa-ai-prompt-box {
+    max-width: 1280px !important;
+  }
+}
+
+/* Tablets & Small Screens (max-width: 1023px) */
+@media (max-width: 1023px) {
+  .nasa-dashboard-outer,
+  .nasa-opening-outer {
+    align-items: stretch;
+    padding: 0 !important;
+  }
+
+  .nasa-dashboard-shell {
+    width: 100vw !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 100dvh;
+    max-height: none !important;
+    flex-direction: column;
+    border-radius: 0 !important;
+    border: none !important;
+    overflow-x: hidden;
+    overflow-y: visible !important;
+  }
+
+  .nasa-opening-shell {
+    width: 100vw !important;
+    max-width: 100% !important;
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+
+  .nasa-sidebar {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid #2b313e;
+    padding: 0.75rem 1rem !important;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .nasa-sidebar-brand {
+    padding-bottom: 0.25rem !important;
+  }
+
+  .nasa-sidebar-nav {
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.5rem;
+    max-height: none !important;
+    padding: 0.15rem 0 0.35rem 0 !important;
+  }
+
+  .nasa-sidebar-nav > button {
+    width: auto !important;
+    flex-shrink: 0;
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  .nasa-sidebar-nav > button br {
+    display: none;
+  }
+
+  .nasa-sidebar-nav > button span {
+    white-space: nowrap;
+    font-size: 12.5px !important;
+  }
+
+  .nasa-main-workspace {
+    overflow: visible !important;
+    padding: 0.875rem !important;
+  }
+
+  .nasa-content-grid {
+    display: flex !important;
+    flex-direction: column-reverse;
+    gap: 1rem !important;
+  }
+
+  .nasa-panel-scroll {
+    max-height: 640px;
+  }
+
+  .nasa-news-scroll {
+    max-height: 360px;
+  }
+
+  .nasa-astro-scroll {
+    max-height: 300px;
+  }
+}
+
+/* Mobile Devices (max-width: 639px) */
+@media (max-width: 639px) {
+  .nasa-opening-shell {
+    min-height: 100dvh !important;
+    height: auto !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+  }
+
+  .nasa-opening-title {
+    font-size: 26px !important;
+    line-height: 1.22 !important;
+    padding: 0 0.5rem;
+  }
+
+  .nasa-opening-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .nasa-opening-version {
+    position: static !important;
+  }
+
+  .nasa-top-actions {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem !important;
+  }
+
+  .nasa-telemetry-cols {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+
+  .nasa-footer-bar {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 0.35rem;
+    font-size: 12px !important;
+  }
+
+  /* Ask with AI responsive adjustments on mobile */
+  .nasa-ai-shell {
+    width: 100vw !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+  }
+
+  .nasa-ai-orb {
+    width: 96px !important;
+    height: 96px !important;
+  }
+
+  .nasa-ai-subtitle {
+    font-size: 24px !important;
+  }
+
+  .nasa-ai-prompt-box {
+    border-radius: 20px !important;
+    padding: 1.25rem 1rem 0.9rem 1rem !important;
+  }
+
+  .nasa-ai-input {
+    font-size: 17px !important;
+  }
+
+  .nasa-ai-pill-btn {
+    padding: 0.45rem 0.9rem !important;
+    font-size: 13.5px !important;
+  }
+}
+
+/* Extra Small Mobile Screens (max-width: 380px) */
+@media (max-width: 380px) {
+  .nasa-opening-title {
+    font-size: 22px !important;
+  }
+
+  .nasa-ai-input {
+    font-size: 15.5px !important;
+  }
+
+  .nasa-ai-pill-btn {
+    padding: 0.4rem 0.7rem !important;
+    font-size: 12.5px !important;
+  }
+}

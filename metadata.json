@@ -1,0 +1,6 @@
+{
+  "name": "NASA LEARN WEB",
+  "description": "Interactive NASA scientific dashboard featuring Earth-like exoplanet spectral analysis, nebula discoveries, and astrophysics telemetry.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,42 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    // Collection: researchNotes
+    // Document ID: {noteId}
+    // Fields:
+    //   - uid: string (required, immutable, matches request.auth.uid)
+    //   - authorName: string (optional, <= 120 chars)
+    //   - planetTarget: string (required, 1..120 chars)
+    //   - noteContent: string (required, 1..5000 chars)
+    //   - createdAt: string (required, immutable, <= 60 chars)
+    // ===============================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isValidResearchNote(data) {
+      return data.keys().hasAll(['uid', 'planetTarget', 'noteContent', 'createdAt']) &&
+             data.keys().hasOnly(['uid', 'authorName', 'planetTarget', 'noteContent', 'createdAt']) &&
+             data.uid is string && data.uid == request.auth.uid &&
+             (!('authorName' in data) || (data.authorName is string && data.authorName.size() <= 120)) &&
+             data.planetTarget is string && data.planetTarget.size() >= 1 && data.planetTarget.size() <= 120 &&
+             data.noteContent is string && data.noteContent.size() >= 1 && data.noteContent.size() <= 5000 &&
+             data.createdAt is string && data.createdAt.size() >= 1 && data.createdAt.size() <= 60;
+    }
+
+    match /researchNotes/{noteId} {
+      allow read: if isAuthenticated() && resource.data.uid == request.auth.uid;
+      allow create: if isAuthenticated() && isValidResearchNote(request.resource.data);
+      allow update: if isAuthenticated() &&
+                    resource.data.uid == request.auth.uid &&
+                    isValidResearchNote(request.resource.data) &&
+                    request.resource.data.uid == resource.data.uid &&
+                    request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if isAuthenticated() && resource.data.uid == request.auth.uid;
+    }
+  }
+}
